@@ -4,10 +4,10 @@ var requireStylesheet = require('stylesheets').requireStylesheet;
 
 requireStylesheet(process.env.STATIC_ROOT + 'MyComponent.css');
 
-var MyComponent = React.createClass({
+var SampleComponent = React.createClass({
   render: function() {
-    return <span className="MyComponent">Hello, MyComponent!</span>;
+    return <span className="MyComponent">Hello, This is a sample component!</span>;
   }
 });
 
-module.exports = MyComponent;
+module.exports = SampleComponent;
