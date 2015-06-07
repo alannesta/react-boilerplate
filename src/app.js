@@ -3,7 +3,7 @@ var SampleComponent = require('./components/sample');
 var TodoApp = TodoApp = require('./components/TodoApp.react')
 
 React.render(
-    <TodoApp/>,
+    <TodoApp />,
     document.getElementById('todoapp')
 );
 
