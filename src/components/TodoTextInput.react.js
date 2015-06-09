@@ -3,13 +3,24 @@ var TodoAction = require('../actions/TodoActions')
 
 var TodoTextInput = React.createClass({
 
-    createTodo: function(event) {
-      TodoAction.create(event.target.value);
+    getInitialState: function() {
+      return {
+          text: ''
+      }
     },
 
-    render: function() {
+    handleChange: function(e) {
+        this.setState({text: e.target.value});
+    },
+
+    createTodo: function (event) {
+        TodoAction.create(event.target.value);
+        this.setState({text: ''});
+    },
+
+    render: function () {
         return (
-            <input onChange={this.createTodo} />
+            <input ref='newTodoInput' value={this.state.text} placeholder={this.props.placeholder} onChange={this.handleChange} onBlur={this.createTodo} />
         )
     }
 });

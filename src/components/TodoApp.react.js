@@ -36,7 +36,7 @@ var app = React.createClass({
             <section>
                 <header>
                     <h1>todos</h1>
-                    <TodoTextInput onEnter={this.addTodo} placeholder="What's up today? "/>
+                    <TodoTextInput placeholder="What's up today? "/>
                 </header>
                 <TodoList todos = {this.state.allTodos}></TodoList>
             </section>
