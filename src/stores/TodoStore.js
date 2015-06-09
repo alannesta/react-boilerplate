@@ -1,6 +1,5 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var TodoConstants = require('../constants/TodoConstants');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
@@ -20,21 +19,30 @@ function create(text) {
     };
 }
 
-var TodoStore = {
+var TodoStore = assign({}, EventEmitter.prototype, {
     getAll: function() {
         return _todos;
     },
     emitChange: function() {
         this.emit(CHANGE_EVENT);
+    },
+
+    addChangeListener: function(callback) {
+        this.on(CHANGE_EVENT, callback);
+    },
+
+    removeChangeListener: function() {
+        this.removeListener(CHANGE_EVENT, callback);
     }
-};
+
+});
 
 
 AppDispatcher.register(function(action) {
     var text;
 
     switch(action.actionType) {
-        case TodoConstants.TODO_CREATE:
+        case 'CREATE_TODO':
             text = action.text.trim();
             if (text !== '') {
                 create(text);

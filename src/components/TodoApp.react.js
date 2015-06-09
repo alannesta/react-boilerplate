@@ -5,7 +5,7 @@
 var React = require('react');
 var TodoTextInput = require('./TodoTextInput.react');
 var TodoList = require('./TodoList.react');
-var TodoStore = require('.stores/TodoStore');
+var TodoStore = require('../stores/TodoStore');
 
 var app = React.createClass({
 
@@ -16,11 +16,7 @@ var app = React.createClass({
     },
 
     getInitialState: function() {
-        return getTodoState()
-    },
-
-    addTodo: function() {
-
+        return this.getTodoState()
     },
 
     componentDidMount: function() {
@@ -32,7 +28,7 @@ var app = React.createClass({
     },
 
     _onChange: function() {
-        this.setState(getTodoState());
+        this.setState(this.getTodoState());
     },
 
     render: function() {
