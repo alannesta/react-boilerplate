@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var _ = require('underscore');
 
 var CHANGE_EVENT = 'change';
 
@@ -19,7 +20,9 @@ function create(text) {
     };
 }
 
-var TodoStore = assign({}, EventEmitter.prototype, {
+var todo_mixin = _.extend({}, EventEmitter.prototype);
+
+var TodoStore = _.extend(todo_mixin, {
     getAll: function() {
         return _todos;
     },
@@ -34,8 +37,25 @@ var TodoStore = assign({}, EventEmitter.prototype, {
     removeChangeListener: function() {
         this.removeListener(CHANGE_EVENT, callback);
     }
-
 });
+
+//var TodoStore = assign({}, EventEmitter.prototype, {
+//    getAll: function() {
+//        return _todos;
+//    },
+//    emitChange: function() {
+//        this.emit(CHANGE_EVENT);
+//    },
+//
+//    addChangeListener: function(callback) {
+//        this.on(CHANGE_EVENT, callback);
+//    },
+//
+//    removeChangeListener: function() {
+//        this.removeListener(CHANGE_EVENT, callback);
+//    }
+//
+//});
 
 
 AppDispatcher.register(function(action) {
